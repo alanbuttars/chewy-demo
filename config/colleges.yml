@@ -1,0 +1,225 @@
+- name: "Massachusetts Institute of Technology"
+  alias: "MIT"
+  enrollment: 11319
+  address: "77 Massachusetts Avenue"
+  city: "Cambridge"
+  state: "MA"
+  zip: "02139"
+  latitude: 42.360
+  longitude: -71.095
+  labels:
+    - "PRIVATE"
+
+- name: "Stanford University"
+  enrollment: 16336
+  address: "450 Serra Mall"
+  city: "Stanford"
+  state: "CA"
+  zip: "94305"
+  latitude: 37.428
+  longitude: -122.170
+  labels:
+    - "PRIVATE"
+
+- name: "Harvard University"
+  enrollment: 21000
+  address: "5 James Street"
+  city: "Cambridge"
+  state: "MA"
+  zip: "02138"
+  latitude: 42.376
+  longitude: -71.123
+  labels:
+    - "PRIVATE"
+
+- name: "California Institute of Technology"
+  alias: "Caltech"
+  enrollment: 2240
+  address: "1200 East California Boulevard"
+  city: "Pasadena"
+  state: "CA"
+  zip: "91125"
+  latitude: 34.138
+  longitude: -118.126
+  labels:
+    - "PRIVATE"
+
+- name: "University of Chicago"
+  enrollment: 16016
+  address: "5801 South Ellis Avenue"
+  city: "Chicago"
+  state: "IL"
+  zip: "60637"
+  latitude: 41.789
+  longitude: -87.600
+  labels:
+    - "PRIVATE"
+
+- name: "Princeton University"
+  enrollment: 8181
+  address: "36 University PI"
+  city: "Princeton"
+  state: "NJ"
+  zip: "08540"
+  latitude: 40.348
+  longitude: -74.661
+  labels:
+    - "PRIVATE"
+
+- name: "Cornell University"
+  enrollment: 21904
+  address: "410 Thurston Avenue"
+  city: "Ithaca"
+  state: "NY"
+  zip: "14850"
+  latitude: 42.454
+  longitude: -76.484
+  labels:
+    - "PRIVATE"
+
+- name: "Yale University"
+  enrollment: 12312
+  address: "133 Wall Street"
+  city: "New Haven"
+  state: "CT"
+  zip: "06511"
+  latitude: 41.312
+  longitude: -72.929
+  labels:
+    - "PRIVATE"
+
+- name: "Johns Hopkins University"
+  enrollment: 20174
+  address: "Shriver Hall 28"
+  city: "Baltimore"
+  state: "MD"
+  zip: "21218"
+  latitude: 39.328
+  longitude: -76.620
+  labels:
+    - "PRIVATE"
+
+- name: "Columbia University"
+  enrollment: 27942
+  address: "116 Street & Broadway"
+  city: "New York"
+  state: "NY"
+  zip: "10027"
+  latitude: 40.808
+  longitude: -73.963
+  labels:
+    - "PRIVATE"
+
+- name: "University of Pennsylvania"
+  enrollment: 21563
+  address: "1 College Lane Hall"
+  city: "Philadelphia"
+  state: "PA"
+  zip: "19104"
+  latitude: 39.952
+  longitude: -75.194
+  labels:
+    - "PRIVATE"
+
+- name: "University of Michigan"
+  enrollment: 44718
+  address: "500 South State Street"
+  city: "Ann Arbor"
+  state: "MI"
+  zip: "48109"
+  latitude: 42.278
+  longitude: -83.738
+  labels:
+    - "PUBLIC"
+
+- name: "Duke University"
+  enrollment: 15130
+  address: "2138 Campus Drive"
+  city: "Durham"
+  state: "NC"
+  zip: "27708"
+  latitude: 36.000
+  longitude: -78.933
+  labels:
+    - "PRIVATE"
+
+- name: "University of California, Berkeley"
+  alias: "UCB"
+  enrollment: 41910
+  address: "103 Cross-Sproul Patch"
+  city: "Berkeley"
+  state: "CA"
+  zip: "94720"
+  latitude: 37.873
+  longitude: -122.259
+  labels:
+    - "PUBLIC"
+
+- name: "Northwestern University"
+  enrollment: 21208
+  address: "633 Clark Street"
+  city: "Evanston"
+  state: "IL"
+  zip: "60208"
+  latitude: 42.056
+  longitude: -87.675
+  labels:
+    - "PRIVATE"
+
+- name: "University of California, Los Angeles"
+  alias: "UCLA"
+  enrollment: 44947
+  address: "385 Charles E. Young Drive East"
+  city: "Los Angeles"
+  state: "CA"
+  zip: "90095"
+  latitude: 34.074
+  longitude: -118.439
+  labels:
+    - "PUBLIC"
+
+- name: "University of California - San Diego"
+  alias: "UCSD"
+  enrollment: 35816
+  address: "9500 Gilman Drive"
+  city: "La Jolla"
+  state: "CA"
+  zip: "92093"
+  latitude: 32.885
+  longitude: -117.235
+  labels:
+    - "PUBLIC"
+
+- name: "Carnegie Mellon University"
+  enrollment: 13948
+  address: "5000 Forbes Avenue"
+  city: "Pittsburgh"
+  state: "PA"
+  zip: "15213"
+  latitude: 40.443
+  longitude: -79.943
+  labels:
+    - "PRIVATE"
+
+- name: "New York University"
+  alias: "NYU"
+  enrollment: 50027
+  address: "383 Lafayette Street"
+  city: "New York"
+  state: "NY"
+  zip: "10003"
+  latitude: 40.728
+  longitude: -73.993
+  labels:
+    - "PRIVATE"
+
+- name: "Brown University"
+  enrollment: 9380
+  address: "69 Brown Street"
+  city: "Providence"
+  state: "RI"
+  zip: "02912"
+  latitude: 41.828
+  longitude: -71.403
+  labels:
+    - "PRIVATE"

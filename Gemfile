@@ -22,6 +22,7 @@ gem 'chewy'
 gem 'rspec-rails'
 
 group :development, :test do
+  gem 'faker', '~> 1.8'
   gem 'rspec-core', '~> 3.5'
   gem 'factory_bot_rails'
   gem 'pry', '0.10.1'
