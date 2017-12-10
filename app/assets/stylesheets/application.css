@@ -33,16 +33,24 @@ form {
   width: 100%;
 }
 
+.full {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
 .left-half {
   position: absolute;
   left: 0px;
   width: 50%;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .right-half {
   position: absolute;
   right: 0px;
   width: 50%;
+  padding-right: 25px;
 }
 #map {
   height: 400px;

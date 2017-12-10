@@ -31,6 +31,7 @@ sudo -u postgres psql
 curl -O "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.1.tar.gz"
 tar -zxf elasticsearch-5.5.1.tar.gz
 rm -f elasticsearch-5.5.1.tar.gz
+sudo elasticsearch-5.5.1/bin/elasticsearch-plugin install analysis-phonetic
 ```
 
 4. Download code source

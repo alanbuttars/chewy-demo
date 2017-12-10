@@ -1,14 +1,24 @@
-<%= form_tag("/colleges/search", method: "get") do %>
-  <%= label_tag(:query, "Search colleges") %>
-  <%= search_field_tag(:query, @query) %>
-  <%= submit_tag("Go") %>
-<% end %>
+<div class="container">
+  <div class="full">
+    <%= form_tag("/colleges/search", method: "get") do %>
+      <%= label_tag(:query, "Search colleges") %>
+      <%= search_field_tag(:query, @query) %>
+
+      <%= hidden_field_tag(:latitude, @latitude) %>
+      <%= hidden_field_tag(:longitude, @longitude) %>
+      <%= hidden_field_tag(:zoom, @zoom) %>
+
+      <%= submit_tag("Go") %>
+    <% end %>
+  </div>
+</div>
 
 <div class="container">
   <div class="left-half">
     <table>
       <thead>
         <tr>
+          <th></th>
           <th>Name</th>
           <th>Enrollment</th>
           <th>City</th>
@@ -17,8 +27,9 @@
       </thead>
 
       <tbody>
-        <% @colleges.each do |college| %>
+        <% @colleges.each_with_index do |college, i| %>
           <tr>
+            <td><%= i + 1 %></td>
             <td><%= link_to college.name, college_path(college) %></td>
             <td><%= college.enrollment %></td>
             <td><%= college.city %></td>
@@ -35,16 +46,30 @@
 
 <script>
   function initMap() {
+    var center = null;
+    var latitude = $("#latitude").val();
+    var longitude = $("#longitude").val();
+    var zoom = $("#zoom").val();
+
+    if (latitude == "" || longitude == "" || zoom == "") {
+      center = { lat: 39.34, lng: -94.77 }
+      zoom = 4;
+    } else {
+      center = { lat: parseFloat(latitude), lng: parseFloat(longitude) }
+      zoom = parseInt(zoom);
+    }
+
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
-      center: {
-        lat: 39.34,
-        lng: -94.77
-      }
+      center: center,
+      zoom: zoom
     });
 
-    // Create an array of alphabetical characters used to label the markers.
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    map.addListener('click', function(e) {
+      $("#latitude").val(e.latLng.lat());
+      $("#longitude").val(e.latLng.lng());
+      $("#zoom").val(map.getZoom());
+      $("form").submit();
+    });
 
     // Add some markers to the map.
     // Note: The code uses the JavaScript Array.prototype.map() method to
@@ -53,7 +78,7 @@
     var markers = locations.map(function(location, i) {
       return new google.maps.Marker({
         position: location,
-        label: labels[i % labels.length]
+        label: "" + (i + 1)
       });
     });
 

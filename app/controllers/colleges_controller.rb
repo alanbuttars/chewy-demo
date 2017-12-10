@@ -13,6 +13,9 @@ class CollegesController < ApplicationController
     redirect_to :colleges if search_params.values.map(&:blank?).all?
 
     @query = search_params[:query]
+    @latitude = search_params[:latitude]
+    @longitude = search_params[:longitude]
+    @zoom = search_params[:zoom]
     @colleges = CollegeService.search(search_params)
   end
 
@@ -22,6 +25,6 @@ class CollegesController < ApplicationController
   end
 
   def _search_params
-    params.permit(:query, :latitude, :longitude)
+    params.permit(:query, :latitude, :longitude, :zoom)
   end
 end

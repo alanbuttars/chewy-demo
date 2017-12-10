@@ -8,14 +8,44 @@ class EmployeeService
         college_id: college_id,
       }
     ).query(
-      multi_match: {
-        query: query,
-        fields: [
-          :first_name,
-          :last_name,
-          :email,
+      bool: {
+        should: [
+          {
+            bool: {
+              should: [
+                {
+                  match: {
+                    pty_surename: {
+                      query: query,
+                    },
+                  },
+                },
+                {
+                  match: {
+                    pty_surename: {
+                      query: query,
+                      fuzziness: 1,
+                    },
+                  },
+                },
+                {
+                  match: {
+                    'pty_surename.metaphone' => {
+                      query: query,
+                    },
+                  },
+                },
+                {
+                  match: {
+                    'pty_surename.porter' => {
+                      query: query,
+                    },
+                  },
+                },
+              ],
+            },
+          },
         ],
-        fuzziness: "AUTO",
       },
     )
 

@@ -1,4 +1,8 @@
-<h1><%= @college.name %></h1>
+<div class="container">
+  <div class="full">
+    <h1><%= @college.name %></h1>
+  </div>
+</div>
 
 <div class ="container">
   <div class="left-half">
@@ -56,13 +60,16 @@
 
 <script>
 	function initMap() {
-		var uluru = {lat: <%= @college.latitude %>, lng: <%= @college.longitude %> };
+    var location = {
+      lat: <%= @college.latitude %>,
+      lng: <%= @college.longitude %>
+    };
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 6,
-			center: uluru
+			center: location 
 		});
 		var marker = new google.maps.Marker({
-			position: uluru,
+			position: location,
 			map: map
 		});
 	}
