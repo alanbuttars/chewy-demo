@@ -1,3 +1,5 @@
+Chewy.logger = Rails.logger
+
 if Rails.env.test?
   Chewy.settings = {
     host: 'localhost:9250',

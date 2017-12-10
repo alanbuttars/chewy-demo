@@ -178,7 +178,7 @@
   labels:
     - "PUBLIC"
 
-- name: "University of California - San Diego"
+- name: "University of California, San Diego"
   alias: "UCSD"
   enrollment: 35816
   address: "9500 Gilman Drive"

@@ -1,0 +1,70 @@
+<h1><%= @college.name %></h1>
+
+<div class ="container">
+  <div class="left-half">
+    <table>
+      <tbody>
+        <% if @college.alias.present? %>
+          <tr>
+            <th>Alias</th>
+            <td><%= @college.alias %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <th>Enrollment</th>
+          <td><%= @college.enrollment %></td>
+        </tr>
+        <tr>
+          <th>Address</th>
+          <td>
+            <%= @college.address %><br/>
+            <%= @college.city %>, <%= @college.state %><br/>
+            <%= @college.zip %><br/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <%= form_tag("/colleges/#{@college.id}/employees/search", method: "get") do %>
+      <%= label_tag(:query, "Search employees") %>
+      <%= search_field_tag(:query, @query) %>
+      <%= submit_tag("Go") %>
+    <% end %>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @employees.each do |employee| %>
+          <tr>
+            <td><%= employee.first_name %> <%= employee.last_name %></td>
+            <td><%= employee.email %></td>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="right-half">
+    <div id="map"></div>
+  </div>
+</div>
+
+<script>
+	function initMap() {
+		var uluru = {lat: <%= @college.latitude %>, lng: <%= @college.longitude %> };
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 6,
+			center: uluru
+		});
+		var marker = new google.maps.Marker({
+			position: uluru,
+			map: map
+		});
+	}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"></script>
