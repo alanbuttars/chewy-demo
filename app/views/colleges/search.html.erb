@@ -1,6 +1,12 @@
 <div class="container">
   <div class="full">
-    <h1>Colleges matching '<%= @query %>'</h1>
+    <p><%= link_to "See all colleges", colleges_path %></p>
+
+    <% if @latitude.blank? || @longitude.blank? %>
+      <h1>Colleges matching '<%= @query %>'</h1>
+    <% else %>
+      <h1>Colleges matching '<%= @query %>' near <%= @latitude %>, <%= @longitude %></h1>
+    <% end %>
   </div>
 </div>
 
