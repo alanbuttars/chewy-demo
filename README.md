@@ -39,7 +39,14 @@ sudo elasticsearch-5.5.1/bin/elasticsearch-plugin install analysis-phonetic
 git clone https://github.com/alanbuttars/chewy-demo.git
 ```
 
-5. Run the application
+5. Register for a Google API Key
+- Go to the <a href="https://console.developers.google.com">Google Developer Console</a>
+- Login or register an account if you do not have one
+- Create a project
+- Create an API key
+- Enable the Google Maps JavaScript API for your API key
+
+6. Run the application
 ```
 cd /path/to/chewy-demo
 gem install bundler
@@ -48,5 +55,5 @@ bundle install
 rake elasticsearch:go
 rake db:go
 
-rails server
+GOOGLE_API_KEY=your-api-key rails server
 ```
