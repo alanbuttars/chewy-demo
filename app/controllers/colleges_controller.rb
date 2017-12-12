@@ -10,7 +10,7 @@ class CollegesController < ApplicationController
 
   def search
     search_params = _search_params
-    redirect_to :colleges if search_params.values.map(&:blank?).all?
+    redirect_to :colleges and return if search_params.values.map(&:blank?).all?
 
     @query = search_params[:query]
     @latitude = search_params[:latitude]

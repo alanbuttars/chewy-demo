@@ -4,6 +4,8 @@
 
     <% if @latitude.blank? || @longitude.blank? %>
       <h1>Colleges matching '<%= @query %>'</h1>
+    <% elsif @query.blank? %>
+      <h1>Colleges near <%= @latitude %>, <%= @longitude %></h1>
     <% else %>
       <h1>Colleges matching '<%= @query %>' near <%= @latitude %>, <%= @longitude %></h1>
     <% end %>

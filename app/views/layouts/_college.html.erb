@@ -47,7 +47,7 @@
       <tbody>
         <% @employees.each do |employee| %>
           <tr>
-            <td><%= employee.first_name %> <%= employee.last_name %></td>
+            <td><%= employee.full_name %></td>
             <td><%= employee.email %></td>
         <% end %>
       </tbody>
