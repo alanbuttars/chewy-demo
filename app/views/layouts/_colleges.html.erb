@@ -3,6 +3,11 @@
     <%= form_tag("/colleges/search", method: "get") do %>
       <%= label_tag(:query, "Search colleges") %>
       <%= search_field_tag(:query, @query) %>
+      <%= select_tag(
+        :label_code,
+        options_from_collection_for_select(@labels, "code", "text", @label_code),
+        prompt: "---"
+      ) %>
 
       <%= hidden_field_tag(:latitude, @latitude) %>
       <%= hidden_field_tag(:longitude, @longitude) %>

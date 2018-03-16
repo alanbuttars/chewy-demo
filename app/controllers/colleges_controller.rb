@@ -1,6 +1,7 @@
 class CollegesController < ApplicationController
   def find_all
     @colleges = CollegeService.find_all
+    @labels = LabelService.find_all
   end
 
   def find
@@ -12,7 +13,9 @@ class CollegesController < ApplicationController
     search_params = _search_params
     redirect_to :colleges and return if search_params.values.map(&:blank?).all?
 
+    @labels = LabelService.find_all
     @query = search_params[:query]
+    @label_code = search_params[:label_code]
     @latitude = search_params[:latitude]
     @longitude = search_params[:longitude]
     @zoom = search_params[:zoom]
@@ -25,6 +28,6 @@ class CollegesController < ApplicationController
   end
 
   def _search_params
-    params.permit(:query, :latitude, :longitude, :zoom)
+    params.permit(:query, :label_code, :latitude, :longitude, :zoom)
   end
 end

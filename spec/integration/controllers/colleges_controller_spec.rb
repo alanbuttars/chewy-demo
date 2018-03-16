@@ -49,7 +49,7 @@ RSpec.describe CollegesController do
       end
     end
 
-    context "when only query is sent" do
+    context "when query is sent" do
       it "returns all colleges matching the name" do
         get "/colleges/search", params: { query: "California" }
         doc = Nokogiri::HTML(response.body)
@@ -73,10 +73,94 @@ RSpec.describe CollegesController do
         expect(doc.css("tbody > tr").text).to include("California Institute of Technology")
       end
 
+      context "and label_code is sent" do
+        it "returns all colleges matching the name and label" do
+          get "/colleges/search", params: { query: "California", label_code: "PUBLIC" }
+          doc = Nokogiri::HTML(response.body)
+          expect(doc.css("h1:first").text).to eq("Public colleges matching 'California'")
+          expect(doc.css("tbody > tr").count).to eq(3)
+          [
+            "University of California, Berkeley",
+            "University of California, Los Angeles",
+            "University of California, San Diego",
+          ].each do |name|
+            expect(doc.css("tbody > tr").text).to include(name)
+          end
+        end
+
+        it "returns all colleges matching the alias and label" do
+          get "/colleges/search", params: { query: "Caltech", label_code: "PRIVATE" }
+          doc = Nokogiri::HTML(response.body)
+          expect(doc.css("h1:first").text).to eq("Private colleges matching 'Caltech'")
+          expect(doc.css("tbody > tr").count).to eq(1)
+          [
+            "California Institute of Technology",
+          ].each do |name|
+            expect(doc.css("tbody > tr").text).to include(name)
+          end
+        end
+
+        context "and location is sent" do
+          it "returns all colleges matching the name, label, and location" do
+            get "/colleges/search", params: { query: "California", label_code: "PUBLIC", latitude: 33.28, longitude: -117.39 }
+            doc = Nokogiri::HTML(response.body)
+            expect(doc.css("h1:first").text).to eq("Public colleges matching 'California' near 33.28, -117.39")
+            expect(doc.css("tbody > tr").count).to eq(2)
+            [
+              "University of California, Los Angeles",
+              "University of California, San Diego",
+            ].each do |name|
+              expect(doc.css("tbody > tr").text).to include(name)
+            end
+          end
+
+          it "returns all colleges matching the alias, label, and location" do
+            get "/colleges/search", params: { query: "Caltech", label_code: "PRIVATE", latitude: 33.28, longitude: -117.39 }
+            doc = Nokogiri::HTML(response.body)
+            expect(doc.css("h1:first").text).to eq("Private colleges matching 'Caltech' near 33.28, -117.39")
+            expect(doc.css("tbody > tr").count).to eq(1)
+            [
+              "California Institute of Technology",
+            ].each do |name|
+              expect(doc.css("tbody > tr").text).to include(name)
+            end
+          end
+        end
+      end
+
+      context "and location is sent" do
+        it "returns all colleges matching the name and location" do
+          get "/colleges/search", params: { query: "University", latitude: 33.28, longitude: -117.39 }
+          doc = Nokogiri::HTML(response.body)
+          expect(doc.css("h1:first").text).to eq("Colleges matching 'University' near 33.28, -117.39")
+          expect(doc.css("tbody > tr").count).to eq(2)
+          [
+            "University of California, Los Angeles",
+            "University of California, San Diego",
+          ].each do |name|
+            expect(doc.css("tbody > tr").text).to include(name)
+          end
+        end
+
+        it "returns all colleges matching the alias and location" do
+          get "/colleges/search", params: { query: "calteh", latitude: 33.28, longitude: -117.39 }
+          doc = Nokogiri::HTML(response.body)
+          expect(doc.css("h1:first").text).to eq("Colleges matching 'calteh' near 33.28, -117.39")
+          expect(doc.css("tbody > tr").count).to eq(1)
+          [
+            "California Institute of Technology",
+          ].each do |name|
+            expect(doc.css("tbody > tr").text).to include(name)
+          end
+        end
+      end
+    end
+
+    context "when label_code is sent" do
       it "returns all colleges matching the label" do
-        get "/colleges/search", params: { query: "public" }
+        get "/colleges/search", params: { label_code: "PUBLIC" }
         doc = Nokogiri::HTML(response.body)
-        expect(doc.css("h1:first").text).to eq("Colleges matching 'public'")
+        expect(doc.css("h1:first").text).to eq("Public colleges")
         expect(doc.css("tbody > tr").count).to eq(4)
         [
           "University of Michigan",
@@ -87,9 +171,24 @@ RSpec.describe CollegesController do
           expect(doc.css("tbody > tr").text).to include(name)
         end
       end
+
+      context "and location is sent" do
+        it "returns all colleges matching the label" do
+          get "/colleges/search", params: { label_code: "PUBLIC", latitude: 33.28, longitude: -117.39 }
+          doc = Nokogiri::HTML(response.body)
+          expect(doc.css("h1:first").text).to eq("Public colleges near 33.28, -117.39")
+          expect(doc.css("tbody > tr").count).to eq(2)
+          [
+            "University of California, Los Angeles",
+            "University of California, San Diego",
+          ].each do |name|
+            expect(doc.css("tbody > tr").text).to include(name)
+          end
+        end
+      end
     end
 
-    context "when only latitude and longitude are sent" do
+    context "when location is sent" do
       it "returns all colleges matching the location" do
         get "/colleges/search", params: { latitude: 33.28, longitude: -117.39 }
         doc = Nokogiri::HTML(response.body)
@@ -97,46 +196,6 @@ RSpec.describe CollegesController do
         expect(doc.css("tbody > tr").count).to eq(3)
         [
           "California Institute of Technology",
-          "University of California, Los Angeles",
-          "University of California, San Diego",
-        ].each do |name|
-          expect(doc.css("tbody > tr").text).to include(name)
-        end
-      end
-    end
-
-    context "when query, latitude, and longitude are sent" do
-      it "returns all colleges matching the location and name" do
-        get "/colleges/search", params: { query: "University", latitude: 33.28, longitude: -117.39 }
-        doc = Nokogiri::HTML(response.body)
-        expect(doc.css("h1:first").text).to eq("Colleges matching 'University' near 33.28, -117.39")
-        expect(doc.css("tbody > tr").count).to eq(2)
-        [
-          "University of California, Los Angeles",
-          "University of California, San Diego",
-        ].each do |name|
-          expect(doc.css("tbody > tr").text).to include(name)
-        end
-      end
-
-      it "returns all colleges matching the location and alias" do
-        get "/colleges/search", params: { query: "calteh", latitude: 33.28, longitude: -117.39 }
-        doc = Nokogiri::HTML(response.body)
-        expect(doc.css("h1:first").text).to eq("Colleges matching 'calteh' near 33.28, -117.39")
-        expect(doc.css("tbody > tr").count).to eq(1)
-        [
-          "California Institute of Technology",
-        ].each do |name|
-          expect(doc.css("tbody > tr").text).to include(name)
-        end
-      end
-
-      it "returns all colleges matching the location and label" do
-        get "/colleges/search", params: { query: "public", latitude: 33.28, longitude: -117.39 }
-        doc = Nokogiri::HTML(response.body)
-        expect(doc.css("h1:first").text).to eq("Colleges matching 'public' near 33.28, -117.39")
-        expect(doc.css("tbody > tr").count).to eq(2)
-        [
           "University of California, Los Angeles",
           "University of California, San Diego",
         ].each do |name|

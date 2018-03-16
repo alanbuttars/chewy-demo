@@ -1,12 +1,3 @@
-- code: "RELIGIOUS-BAPTIST"
-  text: "Baptist"
-
-- code: "RELIGIOUS-CATHOLIC"
-  text: "Catholic"
-
-- code: "RELIGIOUS-METHODIST"
-  text: "Methodist"
-
 - code: "PRIVATE"
   text: "Private"
 

@@ -3,10 +3,10 @@ class CollegesIndex < Chewy::Index
     root do
       field :name
       field :alias
-      field :label_codes, value: -> (college) do
+      field :label_codes, index: "not_analyzed", value: -> (college) do
         college.labels.map(&:code)
       end
-      field :location, type: 'geo_point', value: ->(college) do
+      field :location, type: "geo_point", value: ->(college) do
         { lat: college.latitude, lon: college.longitude }
       end
     end

@@ -20,7 +20,7 @@ class Release001 < ActiveRecord::Migration[5.0]
     end
 
     create_table :labels do |t|
-      t.string :code,           null: false, index: true
+      t.string :code,           null: false, index: true, unique: true
       t.string :text,           null: false
     end
 
